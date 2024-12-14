@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final riverPod=Provider<String>((ref){
-  return 'This is riverpod';
+final riverPod=StateProvider<int>((ref){
+  return 0;
 });
 
 void main() {
-  runApp(ProviderScope(child: const MyApp()));
+  runApp(const ProviderScope(child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -46,9 +46,15 @@ class MyHomePage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context,WidgetRef ref) {
-    final String data= ref.read<String>(riverPod);
     return  Scaffold(
-      body: Center(child: Text(data),),
+      body: Center(child: Consumer(builder: (context,pro,_){
+        final int data= pro.watch<int>(riverPod);
+        return Text(data.toString());
+      }),),
+      
+      floatingActionButton: FloatingActionButton(onPressed: (){
+        ref.read(riverPod.notifier).state++;
+      },child: Icon(Icons.add),),
     );
   }
 }

@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final riverPod=StateProvider<int>((ref){
-  return 0;
-});
+final riverPod=FutureProvider<String>((ref)=>getData());
+
+Future<String> getData() async{
+   return await Future.delayed(const Duration(seconds: 3),(){
+    return 'Hello Rafid';
+  });
+}
 
 void main() {
   runApp(const ProviderScope(child: MyApp()));
@@ -47,14 +51,20 @@ class MyHomePage extends ConsumerWidget {
   @override
   Widget build(BuildContext context,WidgetRef ref) {
     return  Scaffold(
-      body: Center(child: Consumer(builder: (context,pro,_){
-        final int data= pro.watch<int>(riverPod);
-        return Text(data.toString());
-      }),),
+      body: Center(
+        child: ref.watch(riverPod).when(
+            data: (data){
+              return Text(data);
+            },
+            error: (error,stk){
+              return const Text('Nothing');
+            },
+            loading: (){
+              return const CircularProgressIndicator();
+            }),
+      ),
       
-      floatingActionButton: FloatingActionButton(onPressed: (){
-        ref.read(riverPod.notifier).state++;
-      },child: Icon(Icons.add),),
+
     );
   }
 }

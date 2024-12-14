@@ -5,7 +5,7 @@ final riverPod=FutureProvider<String>((ref)=>getData());
 
 Future<String> getData() async{
    return await Future.delayed(const Duration(seconds: 3),(){
-    return 'Hello Rafid';
+    return 'Hello Rafid tawhid';
   });
 }
 

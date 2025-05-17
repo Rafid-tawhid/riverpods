@@ -19,19 +19,17 @@ class ApiService {
     }
   }
 
-  Future<Profile> fetchUserProfile(String userId) async {
-    await Future.delayed(const Duration(seconds: 1)); // Simulate network delay
+  Future<List<ProfileModel>> fetchProfile() async {
+    final response = await http.get(Uri.parse('https://dummyjson.com/users'));
 
-    // Simulated API response
-    final mockJson = {
-      'id': userId,
-      'name': 'Jane Doe',
-      'email': 'jane@example.com',
-      'avatarUrl': 'https://i.pravatar.cc/300',
-      'followers': 243,
-      'following': 156,
-    };
+    if (response.statusCode == 200) {
+      final List<dynamic> jsonData = json.decode(response.body)['users'];
+      return jsonData.map((json) => ProfileModel.fromJson(json)).toList();
 
-    return Profile.fromJson(mockJson);
+    } else {
+      throw Exception('Failed to load posts');
+    }
   }
+
+
 }

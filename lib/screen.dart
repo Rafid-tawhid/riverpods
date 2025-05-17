@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_learning/riverpod.dart';
 
+import 'another/profile_list_screen.dart';
+
 class PostsScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -12,7 +14,11 @@ class PostsScreen extends ConsumerWidget {
       appBar: AppBar(title: const Text('Posts')),
       body: Column(
         children: [
-          const Text('Hello World'),
+          ElevatedButton(
+              onPressed: (){
+                Navigator.push(context, MaterialPageRoute(builder: (context)=>ProfileScreen()));
+              },
+              child: const Text('Hello World')),
           Expanded(
             child: postsAsync.when(
               loading: () => const Center(child: CircularProgressIndicator()),

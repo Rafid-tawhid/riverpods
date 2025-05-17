@@ -12,7 +12,28 @@ class ProfileScreen extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(title: const Text('Profile')),
-      body: profileAsync.when(
+      body: Column(
+        children: [
+          const Text('John Snow'),
+          ProfileSection(profileAsync: profileAsync),
+        ],
+      ),
+    );
+  }
+}
+
+class ProfileSection extends StatelessWidget {
+  const ProfileSection({
+    super.key,
+    required this.profileAsync,
+  });
+
+  final AsyncValue<List<ProfileModel>> profileAsync;
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: profileAsync.when(
         loading: () => const Center(child: CircularProgressIndicator()),
         error: (error, stack) => Center(child: Text('Error: $error')),
         data: (profile) => _ProfileView(profileList: profile),

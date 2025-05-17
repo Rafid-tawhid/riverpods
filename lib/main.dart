@@ -1,13 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_learning/screen.dart';
 
-final riverPod=FutureProvider<String>((ref)=>getData());
-
-Future<String> getData() async{
-   return await Future.delayed(const Duration(seconds: 3),(){
-    return 'Hello Rafid tawhid';
-  });
-}
 
 void main() {
   runApp(const ProviderScope(child: MyApp()));
@@ -40,32 +34,10 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const MyHomePage(),
+      home: PostsScreen(),
     );
   }
 }
 
-class MyHomePage extends ConsumerWidget {
-  const MyHomePage({super.key});
 
-  @override
-  Widget build(BuildContext context,WidgetRef ref) {
-    return  Scaffold(
-      body: Center(
-        child: ref.watch(riverPod).when(
-            data: (data){
-              return Text(data);
-            },
-            error: (error,stk){
-              return const Text('Nothing');
-            },
-            loading: (){
-              return const CircularProgressIndicator();
-            }),
-      ),
-      
-
-    );
-  }
-}
 

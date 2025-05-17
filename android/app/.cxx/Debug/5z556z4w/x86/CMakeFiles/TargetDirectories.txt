@@ -1,0 +1,2 @@
+/Users/mis-app-developer/AndroidStudioProjects/riverpods/android/app/.cxx/Debug/5z556z4w/x86/CMakeFiles/edit_cache.dir
+/Users/mis-app-developer/AndroidStudioProjects/riverpods/android/app/.cxx/Debug/5z556z4w/x86/CMakeFiles/rebuild_cache.dir

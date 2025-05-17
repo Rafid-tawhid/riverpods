@@ -1,0 +1,1 @@
+/Users/mis-app-developer/AndroidStudioProjects/riverpods/build/app/intermediates/cxx/Debug/5z556z4w/obj/arm64-v8a
